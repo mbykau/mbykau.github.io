@@ -2,8 +2,19 @@
     <head>
         <script type="text/javascript">
             window.onload = function() {
-                window.location = "fb://profile/20281766647";
-                setTimeout(function () { window.location = "https://www.facebook.com/coachella/"; }, 5);
+                var iframe = document.createElement("iframe");
+                var uri = 'fb://profile/20281766647';
+                var interval = setInterval(function() {         
+                    window.location = "https://www.facebook.com/coachella/";
+                }, 500);
+                iframe.onload = function() {
+                    clearInterval(interval);
+                    iframe.parentNode.removeChild(iframe);
+                    window.location.href = uri;
+                };
+                iframe.src = uri;
+                iframe.setAttribute("style", "display:none;");
+                document.body.appendChild(iframe);  
             };
         </script>
     </head>
